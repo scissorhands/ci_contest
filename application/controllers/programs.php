@@ -22,6 +22,51 @@ class Programs extends CI_Controller {
 		return ($x%$y==0)? true : false;
 	}
 
+	public function prime_factors($n = 15){
+		set_time_limit(0);
+		echo "Prime factors ($n): <br>";
+		$factors = array();
+		$i = 2;
+		while ($n != 1) {
+			while($this->is_mod_int($n, $i)){
+				$factors[] = $i;
+				$n = $n/$i;
+			}
+			$i++;
+		}
+		echo "<pre>";
+		print_r($factors);
+		echo "</pre>";
+	}
+
+	public function prime_factorsB($n = 15){
+		set_time_limit(2000);
+		$n_ = $n;
+		echo "Prime factors ($n): <br>";
+		$factors = array();
+
+		while($this->is_mod_int($n, 2)){
+			$factors[] = 2;
+			$n = $n/2;
+		}
+
+		$root = sqrt($n_);
+		$i = 3;
+		while ($i <= $root && $n > 1) {
+			echo $i."<br />";
+			while($this->is_mod_int($n, $i)){
+				$factors[] = $i;
+				$n = $n/$i;
+			}
+			$i = $i + 2;
+		}
+		echo "<pre>";
+		print_r($factors);
+		echo "</pre>";
+		/*
+		*/
+	}
+
 	public function problema03($num, $offset = 0){
 		set_time_limit(0);
 		for ($i=$offset; $i < $num; $i++) { 
@@ -57,6 +102,7 @@ class Programs extends CI_Controller {
 			}
 		}
 		//echo "YES<br><br>";
+
 		return true;
 	}
 
